@@ -1,0 +1,99 @@
+<!--
+<h2>My Heroes</h2>
+  
+<div [ngClass]="{'row':true}">
+<div [ngClass]="{'col-md-5':true,'col-md-offset-2':true}">
+<table [ngClass]="{'table':true,'table-striped':true,
+'table-responsive':true}">
+
+<tr >
+    <th scope="col">Name</th>
+    <th scope="col">Aliases</th>
+    <th scope="col">Details</th>
+  </tr>
+<div *ngFor="let hero of heroes">
+  <tr>
+    <td>{{hero.name}}</td>
+    <td>{{hero.biography.aliases[1]}}</td> 
+    <td><img src={{hero.image.url}} class="img-fluid" alt="Responsive image"></td>
+  </tr>
+</div>
+
+</table>
+</div>
+</div>
+-->
+
+<br>
+
+<h2>Find your Hero</h2>
+<div>
+ 
+  <mat-form-field>
+    <input matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchHeroCtrl">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>      
+      <ng-container *ngIf="!isLoading">
+        <mat-option *ngFor="let hero of filteredHero" [value]="hero.name">
+          <span><b>{{hero.name}}</b> ({{hero.id}})</span>
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+    <mat-error>Not Found</mat-error>
+  </mat-form-field>
+ 
+  <br>
+ 
+  <!--
+
+<ng-container *ngIf="errorMsg; else elseTemplate">
+  {{errorMsg}}
+</ng-container>
+
+<ng-template #elseTemplate>
+  <h5>Selected Value: {{searchHeroCtrl.value}}</h5>
+</ng-template>
+ -->
+</div>
+
+<div *ngIf="!errorMsg">
+
+<div class="row" *ngIf="filteredHero?.length > 0">
+<div [ngClass]="{'row':true, 'col-md-6':true,'col-md-offset-2':true}">
+  
+    <table [ngClass]="{'table':true,'table-striped':true,
+    'table-responsive':true}">
+    
+    <tr class="heroes">
+        <th scope="col">Name</th>
+        <th scope="col">Aliases</th>
+        <th scope="col">Details</th>
+      </tr>
+        
+
+  <div *ngFor="let hero of filteredHero"
+    [class.selected]="hero.id === selectedId">
+    
+    <tr class="heroes">
+    <td><a [routerLink]="['/hero', hero.id]">
+     <!-- <span class="badge">{{ hero.id }}</span>-->
+      {{ hero.name }}
+    </a>
+  </td>
+    <td>{{hero.biography.aliases[0]}}</td>     
+
+  </tr>
+  </div>
+
+</table>
+</div>
+</div>
+</div>
+<div *ngIf="errorMsg">
+  No results found
+</div>
+<!--
+<button routerLink="/sidekicks">Go to sidekicks</button>
+
+ <app-hero-detail [hero]="selectedHero"></app-hero-detail>
+ -->

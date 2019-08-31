@@ -1,0 +1,210 @@
+<br>
+<div *ngIf="hero$ | async as hero">
+  <div *ngIf='hero.response === "success"'>
+  <h3>{{ hero.name }}</h3>
+  <img src={{hero.image.url}} class="img-fluid" alt="Responsive image">
+  <div>
+    <label>Id: </label>{{ hero.id }}</div>
+  <div>
+    <label>Name: </label>
+    {{hero.name}}
+    <!-- <input [(ngModel)]="hero.name" placeholder="name"/>-->
+  </div>
+  <div *ngIf="hero.powerstats.intelligence != 'null' ||
+              hero.powerstats.strength != 'null' || 
+              hero.powerstats.speed != 'null' || 
+              hero.powerstats.durability != 'null' || 
+              hero.powerstats.power != 'null' || 
+              hero.powerstats.combat != 'null'">
+  <table [ngClass]="{'table':true,'table-striped':true,
+    'table-responsive':true}"  >
+    <tr>
+      <th>
+        Powerstats
+      </th>
+      <th></th>
+    </tr>
+    <tr *ngIf="hero.powerstats.intelligence != 'null'">
+      <td>Intelligence: </td>
+      <td>
+        {{hero.powerstats.intelligence}}
+      </td>
+    </tr>
+    <tr *ngIf="hero.powerstats.strength != 'null'">
+      <td>Strength </td>
+      <td>
+        {{hero.powerstats.strength}}
+      </td>
+    </tr>
+    <tr *ngIf="hero.powerstats.speed != 'null'">
+        <td>Speed </td>
+        <td>
+          {{hero.powerstats.speed}}
+        </td>
+      </tr>
+      <tr *ngIf="hero.powerstats.durability != 'null'">
+        <td>Durability </td>
+        <td>
+          {{hero.powerstats.durability}}
+        </td>
+      </tr>
+      <tr *ngIf="hero.powerstats.power != 'null'">
+        <td>Power </td>
+        <td>
+          {{hero.powerstats.power}}
+        </td>
+      </tr>
+      <tr *ngIf="hero.powerstats.combat != 'null'">
+        <td>Combat </td>
+        <td>
+          {{hero.powerstats.combat}}
+        </td>
+      </tr>
+  </table>
+</div>
+  <table [ngClass]="{'table':true,'table-striped':true,
+    'table-responsive':true}">
+    <tr>
+      <th>
+        Biography
+      </th>
+      <th></th>
+    </tr>
+    <tr *ngIf="hero.biography['full-name'] != ''">
+      <td>Full Name </td>
+      <td>
+        {{hero.biography['full-name']}}
+      </td>
+    </tr>
+    <tr>
+      <td>Alter-egos </td>
+      <td>
+        {{hero.biography['alter-egos']}}
+      </td>
+    </tr>
+    <tr *ngIf="hero.biography.aliases[0] != '-'">
+      <td>Aliases</td>
+      <td>
+        <p *ngFor="let aliase of hero.biography.aliases">       
+            {{aliase}}
+        </p>
+</td>
+</tr>
+    <tr *ngIf="hero.biography['place-of-birth'] != '-'" >
+      <td>Place of Birth </td>
+      <td>
+        {{hero.biography['place-of-birth']}}
+      </td>
+    </tr>
+    <tr *ngIf="hero.biography['first-appearance'] != '-'">
+      <td>First Appearance </td>
+      <td>
+        {{hero.biography['first-appearance']}}
+      </td>
+    </tr>
+    <tr>
+        <td>Publisher </td>
+        <td>
+          {{hero.biography.publisher}}
+        </td>
+      </tr>
+      <tr *ngIf="hero.biography.alignment != '-'">
+        <td>Alignment </td>
+        <td>
+          {{hero.biography.alignment}}
+        </td>
+      </tr>
+  </table>
+
+  <table  [ngClass]="{'table':true,'table-striped':true,
+  'table-responsive':true}">
+    <tr>
+      <th>Appearance </th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>{{hero.appearance.gender}}</td>
+    </tr>
+    <tr *ngIf="hero.appearance.race != 'null'">
+        <td>Race</td>
+        <td>{{hero.appearance.race}}</td>
+      </tr>
+    <tr *ngIf="hero.appearance.height[0] != '-' || 
+               hero.appearance.height[1] != '0 cm'">
+        <td>Height</td>
+        <td>
+          <p *ngIf="hero.appearance.height[0] != '-'">
+              {{hero.appearance.height[0]}}
+          </p>
+          <p *ngIf="hero.appearance.height[1] != '0 cm'">
+              {{hero.appearance.height[1]}}
+          </p>
+        </td>
+      </tr>
+      <tr *ngIf="hero.appearance.weight[0] != '- lb' || 
+                 hero.appearance.weight[1] != '0 kg'">
+        <td>Weight</td>
+        <td>
+            <p *ngIf="hero.appearance.weight[0] != '- lb'">
+                {{hero.appearance.weight[0]}}
+            </p>
+            <p *ngIf="hero.appearance.weight[1] != '0 kg'">
+                {{hero.appearance.weight[1]}}
+            </p>
+          </td>
+      </tr>
+      <tr *ngIf="hero.appearance['eye-color'] != '-'">
+        <td>Eye Color</td>
+        <td>{{hero.appearance['eye-color']}}</td>
+      </tr>
+      <tr *ngIf="hero.appearance['hair-color'] != '-'">
+        <td>Hair Color</td>
+        <td>{{hero.appearance['hair-color']}}</td>
+      </tr>
+  </table>
+
+  <div *ngIf="hero.work.occupation != '-' || 
+              hero.work.base != '-'">
+  <table [ngClass]="{'table':true,'table-striped':true,
+  'table-responsive':true}">
+    <tr>
+      <th>Work</th>
+      <th></th>
+    </tr>
+    <tr *ngIf="hero.work.occupation != '-'">
+      <td>Occupation</td>
+      <td>{{hero.work.occupation}}</td>
+    </tr>
+    <tr *ngIf="hero.work.base != '-'">
+      <td>Base</td>
+      <td>{{hero.work.base}}</td>
+    </tr>
+  </table>
+</div>
+
+  <div *ngIf="hero.connections['group-affiliation'] != '-' ||
+             hero.connections.relatives != '-'">
+  <table [ngClass]="{'table':true,'table-striped':true,
+  'table-responsive':true}">
+    <tr>
+      <th>Connections</th>
+      <th></th>
+    </tr>
+    <tr *ngIf="hero.connections['group-affiliation'] != '-'">
+      <td>Group Affiliation</td>
+      <td>{{hero.connections['group-affiliation']}}</td>
+    </tr>
+    <tr *ngIf="hero.connections.relatives != '-'">
+      <td>Relatives</td>
+      <td>{{hero.connections.relatives}}</td>
+    </tr>
+
+  </table>
+</div>
+  <p>
+    <button (click)="gotoHeroes(hero)">Back</button>
+  </p>
+
+</div>
+</div>
